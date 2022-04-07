@@ -1,0 +1,6 @@
+#!/bin/sh
+echo 'Choose file to compile.'
+file="$(ls | fzf)"
+obj="$(echo "${file%.*}")"
+[[ $file = *.c ]] && gcc -Wall -Wextra -Wshadow -o "$obj" "$file"; exit
+[[ $file = *.cpp ]] && g++ -Wall -Wextra -Wshadow -o "$obj" "$file"; exit

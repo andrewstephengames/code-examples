@@ -24,7 +24,7 @@ void printUsage ()
      printf ("-a: print about info and exit\n");
      printf ("-r: number of words to output\n");
      printf ("-h: print usage and exit\n");
-     printf ("\nDefaults: \"-r 10 -o stdout\"\n");
+     printf ("\nDefaults: -r variable -o stdout\n\n");
 }
 
 int main (int argc, char **argv)
@@ -62,18 +62,43 @@ int main (int argc, char **argv)
           fscanf (in, "%s", words[i]);
      if (strlen (outputFilename) == 0)
           strcpy (outputFilename, "stdout");
-     if (!randSize)
-          randSize = 10;
      //TODO
      //if (outputSignal)
           FILE *out = fopen (outputFilename, "w");
-     for (size_t i = 0; i < randSize; i++)
-          if (strcmp (outputFilename, "stdout") == 0)
-               fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
-          else 
-          {
-               fprintf (out, "%s ", words[rand()%WORD_COUNT]);
-          }
+     if (randSize)
+     {
+          for (size_t i = 0; i < randSize; i++)
+               if (strcmp (outputFilename, "stdout") == 0)
+               {
+                    if (words[rand()%WORD_COUNT][0] == '#')
+                         fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
+                    else 
+                         fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
+               }
+               else 
+               {
+                    if (words[rand()%WORD_COUNT][0] == '#')
+                         fprintf (out, "%s ", words[rand()%WORD_COUNT]+1);
+               }
+     }
+     else
+     {
+          for (int i = 0; i < rand()%(WORD_COUNT-1); i++)
+               if (strcmp (outputFilename, "stdout") == 0)
+               {
+                    if (words[rand()%WORD_COUNT][0] == '#')
+                         fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
+                    else 
+                         fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
+               }
+               else 
+               {
+                    if (words[rand()%WORD_COUNT][0] == '#')
+                         fprintf (out, "%s ", words[rand()%WORD_COUNT]+1);
+                    else 
+                         fprintf (out, "%s ", words[rand()%WORD_COUNT]);
+               }
+     }
      if (strcmp (outputFilename, "stdout") == 0)
           fprintf (stdout, "\n");
      else 

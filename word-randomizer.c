@@ -1,11 +1,12 @@
 //TODO: File named stdout gets created by default
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <string.h>
 
 #define WORD_COUNT 100
 #define MAX_LEN 20
-#define PI 31415926
+#define PI 3.1415926535897
 
 void aboutInfo ()
 {
@@ -28,7 +29,7 @@ void printUsage ()
 
 int main (int argc, char **argv)
 {
-     srand (PI);
+     srand (clock());
      size_t randSize = 0, outputSignal = 0;
      char outputFilename[255] = "";
      FILE *in = fopen ("words.txt", "r");

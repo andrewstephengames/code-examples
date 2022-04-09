@@ -133,7 +133,6 @@ great
 think 
 say 
 hel
-
 low 
 line 
 before 
@@ -240,9 +239,7 @@ draw
 left 
 late 
 run 
-don
-'
-t 
+don't 
 while 
 press 
 close 

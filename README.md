@@ -16,4 +16,4 @@ In order to use the compilation script ``co`` you may need to install the follow
 
 # Examples in action
 
-![lolcat + word-randomizer](word-randomizer.png "word-randomizer") [Lolcat](https://github.com/busyloop/lolcat) + word-randomizer
+![lolcat + word-randomizer](word-randomizer/word-randomizer.png "word-randomizer") [Lolcat](https://github.com/busyloop/lolcat) + word-randomizer

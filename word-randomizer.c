@@ -1,14 +1,15 @@
+//TODO: File named stdout gets created by default
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <string.h>
 
-#define WORD_COUNT 50
+#define WORD_COUNT 100
 #define MAX_LEN 20
+#define PI 31415926
 
 void aboutInfo ()
 {
-     printf ("Word Randomizer\n");
+     printf ("\nWord Randomizer\n");
      printf ("\n");
      printf ("Author: Andrew Stephen\n");
      printf ("\n");
@@ -17,48 +18,64 @@ void aboutInfo ()
 
 void printUsage ()
 {
-     printf ("Usage:\n");
+     printf ("\nUsage:\n");
      printf ("-o: output file\n");
-     printf ("-a: print about information\n");
+     printf ("-a: print about info and exit\n");
      printf ("-r: number of words to output\n");
-     printf ("-h: print usage\n");
+     printf ("-h: print usage and exit\n");
+     printf ("\nDefaults: \"-r 10 -o stdout\"\n");
 }
 
 int main (int argc, char **argv)
 {
-     srand (time(0));
-     size_t randSize = 0;
-     char *outputFilename;
+     srand (PI);
+     size_t randSize = 0, outputSignal = 0;
+     char outputFilename[255] = "";
      FILE *in = fopen ("words.txt", "r");
-     FILE *out = fopen (outputFilename, "w");
      if ((argc > 1) && (argv[1][0] == '-'))
      {
           switch (argv[1][1])
           {
                case 'o':
+                    outputSignal = 1;
                     strcpy (outputFilename, argv[2]);
                     break;
                case 'h':
                     printUsage ();
+                    exit (EXIT_SUCCESS);
                     break;
                case 'a':
                     aboutInfo ();
+                    exit (EXIT_SUCCESS);
                     break;
                case 'r':
                     randSize = atoi (argv[2]);
                     break;
                default:
-                    printf ("Invalid argument!\n");
+                    printf ("\nInvalid argument!\n");
                     break;
           }
      }
      char words[WORD_COUNT][MAX_LEN];
      for (size_t i = 0; i < WORD_COUNT; i++)
           fscanf (in, "%s", words[i]);
-     if (strcmp (outputFilename, NULL) == 0)
+     if (strlen (outputFilename) == 0)
           strcpy (outputFilename, "stdout");
+     if (!randSize)
+          randSize = 10;
+     //TODO
+     //if (outputSignal)
+          FILE *out = fopen (outputFilename, "w");
      for (size_t i = 0; i < randSize; i++)
-          fprintf (out, "%s ", words[rand()%WORD_COUNT]);
-     fprintf (out, "\n");
+          if (strcmp (outputFilename, "stdout") == 0)
+               fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
+          else 
+          {
+               fprintf (out, "%s ", words[rand()%WORD_COUNT]);
+          }
+     if (strcmp (outputFilename, "stdout") == 0)
+          fprintf (stdout, "\n");
+     else 
+          fprintf (out, "\n");
      return 0;
 }

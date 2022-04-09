@@ -1,4 +1,3 @@
-//TODO: File named stdout gets created by default
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -62,9 +61,9 @@ int main (int argc, char **argv)
           fscanf (in, "%s", words[i]);
      if (strlen (outputFilename) == 0)
           strcpy (outputFilename, "stdout");
-     //TODO
-     //if (outputSignal)
-          FILE *out = fopen (outputFilename, "w");
+     FILE *out;
+     if (outputSignal)
+          out = fopen (outputFilename, "w");
      if (randSize)
      {
           for (size_t i = 0; i < randSize; i++)

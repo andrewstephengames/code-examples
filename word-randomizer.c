@@ -31,7 +31,9 @@ int main (int argc, char **argv)
      srand (clock());
      size_t randSize = 0, outputSignal = 0;
      char outputFilename[255] = "";
+     char words[WORD_COUNT][MAX_LEN];
      FILE *in = fopen ("words.txt", "r");
+     FILE *out;
      if ((argc > 1) && (argv[1][0] == '-'))
      {
           switch (argv[1][1])
@@ -56,12 +58,10 @@ int main (int argc, char **argv)
                     break;
           }
      }
-     char words[WORD_COUNT][MAX_LEN];
      for (size_t i = 0; i < WORD_COUNT; i++)
           fscanf (in, "%s", words[i]);
      if (strlen (outputFilename) == 0)
           strcpy (outputFilename, "stdout");
-     FILE *out;
      if (outputSignal)
           out = fopen (outputFilename, "w");
      if (randSize)

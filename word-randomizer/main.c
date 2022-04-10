@@ -32,8 +32,7 @@ int main (int argc, char **argv)
      size_t randSize = 0, outputSignal = 0, appendSignal = 0;
      char outputFilename[255] = "";
      char words[WORD_COUNT][MAX_LEN];
-     FILE *in = fopen ("words.txt", "r");
-     FILE *out;
+     FILE *in = fopen ("words.txt", "r"), *out;
      while ((argc > 1) && (argv[1][0] == '-'))
      {
           switch (argv[1][1])
@@ -54,6 +53,7 @@ int main (int argc, char **argv)
                     break;
                default:
                     printf ("\nInvalid argument!\n");
+                    exit (EXIT_SUCCESS);
                     break;
           }
           ++argv;
@@ -76,17 +76,29 @@ int main (int argc, char **argv)
           {
                for (size_t i = 0; i < randSize; i++)
                     if (words[rand()%WORD_COUNT][0] == '#')
+                    {
                          fprintf (out, "%s ", words[rand()%WORD_COUNT]+1);
+                         printf ("\n%s\n", outputFilename);
+                    }
                     else 
+                    {
                          fprintf (out, "%s ", words[rand()%WORD_COUNT]);
+                         printf ("\n%s\n", outputFilename);
+                    }
           }
           else 
           {
                for (size_t i = 0; i < randSize; i++)
                     if (words[rand()%WORD_COUNT][0] == '#')
+                    {
                          fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
+                         printf ("\n%s\n", outputFilename);
+                    }
                     else 
+                    {
                          fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
+                         printf ("\n%s\n", outputFilename);
+                    }
           }
      }
      else
@@ -98,7 +110,10 @@ int main (int argc, char **argv)
                          continue;
  //                        fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
                     else 
+                    {
+                         printf ("\n%s\n", outputFilename);
                          fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
+                    }
                }
                else 
                {
@@ -106,7 +121,10 @@ int main (int argc, char **argv)
                          continue;
 //                         fprintf (out, "%s ", words[rand()%WORD_COUNT]+1);
                     else 
+                    {
+                         printf ("\n%s\n", outputFilename);
                          fprintf (out, "%s ", words[rand()%WORD_COUNT]);
+                    }
                }
      }
      if (strcmp (outputFilename, "stdout") == 0)

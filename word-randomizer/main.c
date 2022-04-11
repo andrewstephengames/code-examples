@@ -29,6 +29,7 @@
 #define WHITE "\033[1;37m"
 #define RESET "\033[0m"
 
+//color array
 char colors[16][10] = {
      BLACK,
      RED,

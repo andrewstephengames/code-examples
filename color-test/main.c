@@ -21,6 +21,7 @@
 #define WHITE "\033[1;37m"
 #define RESET "\033[0m"
 
+//color array
 char colors[16][10] = {
      BLACK,
      RED,
@@ -42,33 +43,15 @@ char colors[16][10] = {
 };
 
 
-void red ()
-{
-     printf(LIGHT_RED);
-}
-void yellow ()
-{
-     printf(YELLOW);
-}
-void reset ()
-{
-     printf(RESET);
-}
 int main () 
 {
-/*
-     red();
-     printf("Hello ");
-     yellow();
-     printf("world\n");
-     reset();
-     //EXAMPLE
-*/
      srand (clock());
      for (size_t i = 0; i < 2147483647; i++)
      {
           printf (colors[rand()%16]);
-          printf ("%lu\n", i);
+          printf ("%lu ", i);
      }
+     printf ("\n");
      return 0;
 }
+

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <limits.h>
 
 //colors
 #define BLACK "\033[0;30m"
@@ -43,13 +44,21 @@ char colors[16][10] = {
 };
 
 
-int main () 
+int main (int argc, char **argv)
 {
      srand (clock());
-     for (size_t i = 0; i < 2147483647; i++)
+     if (argc < 2)
+     {
+          printf ("Invalid Argument!\n");
+          printf ("Usage: ./main <num>\n");
+          printf ("Upper limit for <num>: %lld\n", LLONG_MAX);
+          exit (EXIT_FAILURE);
+     }
+     long long int num = atoll (argv[1]);
+     for (long long int i = 0; i < num; i++)
      {
           printf (colors[rand()%16]);
-          printf ("%lu ", i);
+          printf ("%lld ", i);
      }
      printf ("\n");
      return 0;

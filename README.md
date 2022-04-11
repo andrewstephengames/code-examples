@@ -18,4 +18,4 @@ In order to use the compilation script ``co`` you may need to install the follow
 
 ![lolcat + word-randomizer](word-randomizer/word-randomizer.png "word-randomizer") [Lolcat](https://github.com/busyloop/lolcat) + word-randomizer
 
-![color-test](https://user-images.githubusercontent.com/87263840/162834666-e4513d46-5939-4685-8669-cec3348a9c26.png "color-test") color-test from 0 to 10000
+![color-test](color-test/color-test.png "color-test") color-test from 0 to 10000

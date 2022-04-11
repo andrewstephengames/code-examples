@@ -20,4 +20,4 @@ In order to use the compilation script ``co`` you may need to install the follow
 
 ![color-test](color-test/color-test.png "color-test") color-test from 0 to 10000
 
-![multi-threading](multi-threading/multi-threading.png "multi-threading") Multithreading the sum from 0 to argv[1] (proof in htop window)
+![multi-threading](multi-threading/multi-threading.png "multi-threading") Multithreading the sum from 0 to 2147483647 (proof in htop window)

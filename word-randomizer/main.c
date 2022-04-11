@@ -7,7 +7,7 @@
 #include <string.h>
 
 //constants
-#define WORD_COUNT 500
+#define WORD_COUNT 255
 #define MAX_LEN 20
 #define PI 3.1415926535897
 

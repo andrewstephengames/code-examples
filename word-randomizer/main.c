@@ -115,6 +115,7 @@ int main (int argc, char **argv)
                     break;
                default:
                     printf ("Invalid argument!\n");
+                    printf ("Type `%s -h` for help.\n", argv[0]);
                     exit (EXIT_FAILURE);
                     break;
           }

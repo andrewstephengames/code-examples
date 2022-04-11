@@ -1,5 +1,6 @@
-//TODO: custom input file
+//TODO: Add custom input file
 //TODO: Fix output in custom file with multiple switches
+//TODO: Fix segmentation fault for any output
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -59,6 +60,7 @@ void printUsage ()
      printf ("-a: append mode (requires -o): Appends text to the output file on repeated execution\n");
      printf ("-r: number of words to output\n");
      printf ("-x: output non-colored plain text\nText color in this mode depends on your desktop.\n");
+     printf ("Note: Only works if no output file is specified, or the output file specified is stdout.\n");
      printf ("Examples:\nGNOME uses a light terminal by default, so the text color is black.\n");
      printf ("KDE, most standalone window managers and the tty: uses a black background, so the text color is white.\n");
      printf ("Windows: cmd uses a black background and a white foreground, so the text is white.\n");
@@ -138,7 +140,6 @@ int main (int argc, char **argv)
                          if (words[rand()%WORD_COUNT][0] == '#')
                          {
                               if (commentSignal)
-                                   if (colorSignal)
                                    fprintf (out, "%s ", words[rand()%WORD_COUNT]+1);
                               else continue;
                               //printf ("\n%s\n", outputFilename);
@@ -146,6 +147,27 @@ int main (int argc, char **argv)
                          else 
                          {
                               fprintf (out, "%s ", words[rand()%WORD_COUNT]);
+                              //printf ("\n%s\n", outputFilename);
+                         }
+               }
+               else
+               {
+                         if (words[rand()%WORD_COUNT][0] == '#')
+                         {
+                              if (commentSignal)
+                              {
+                                   if (colorSignal)
+                                        printf (colors[rand()%16]);
+                                   fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
+                              }
+                              else continue;
+                              //printf ("\n%s\n", outputFilename);
+                         }
+                         else 
+                         {
+                              if (colorSignal)
+                                   printf (colors[rand()%16]);
+                              fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
                               //printf ("\n%s\n", outputFilename);
                          }
                }
@@ -158,12 +180,18 @@ int main (int argc, char **argv)
                     if (words[rand()%WORD_COUNT][0] == '#')
                     {
                          if (commentSignal)
+                         {
+                              if (colorSignal)
+                                   printf (colors[rand()%16]);
                               fprintf (stdout, "%s ", words[rand()%WORD_COUNT]+1);
+                         }
                          else continue;
                     }
                     else 
                     {
                          //printf ("\n%s\n", outputFilename);
+                         if (colorSignal)
+                              printf (colors[rand()%16]);
                          fprintf (stdout, "%s ", words[rand()%WORD_COUNT]);
                     }
                }

@@ -39,7 +39,11 @@ int main (int argc, char **argv)
      srand (clock());
      if (argc < 2)
      {
+          printf ("Invalid argument! Please check the usage!\n");
           printf ("Usage: %s <num>\n", argv[0]);
+          printf ("Limits: <num> accepts every number upto LLONG_MAX.\n");
+          printf ("Unless you have a Threadripper, I advise not using any number past ULONG_MAX.\n");
+          printf ("See `man 3 limits.h` for more details.\n");
           exit(EXIT_FAILURE);
      }
      long long int limit = atoll (argv[1]);

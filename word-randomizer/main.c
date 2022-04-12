@@ -1,6 +1,5 @@
 //TODO: Add custom input file
 //TODO: Fix output in custom file with multiple switches
-//TODO: Fix segmentation fault for any output
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -31,7 +30,7 @@
 #define RESET "\033[0m"
 
 //color array
-char colors[16][10] = {
+char colors[20][20] = {
      BLACK,
      RED,
      GREEN,
@@ -62,7 +61,7 @@ void printUsage ()
      printf ("-x: output non-colored plain text\nText color in this mode depends on your desktop.\n");
      printf ("Note: Only works if no output file is specified, or the output file specified is stdout.\n");
      printf ("Examples:\nGNOME uses a light terminal by default, so the text color is black.\n");
-     printf ("KDE, most standalone window managers and the tty: uses a black background, so the text color is white.\n");
+     printf ("KDE, most standalone window managers and the tty: use a black background, so the text color is white.\n");
      printf ("Windows: cmd uses a black background and a white foreground, so the text is white.\n");
      printf ("-h: print usage and exit\n");
      printf ("\nDefaults: -r variable -o stdout\n\n");
@@ -212,8 +211,10 @@ int main (int argc, char **argv)
      if (strcmp (outputFilename, "stdout") == 0)
           fprintf (stdout, "\n");
      else 
+     {
           fprintf (out, "\n");
+          fclose (out);
+     }
      fclose (in);
-     fclose (out);
      return 0;
 }

@@ -59,10 +59,12 @@ void printUsage ()
      printf ("-a: append mode (requires -o): Appends text to the output file on repeated execution\n");
      printf ("-r: number of words to output\n");
      printf ("-x: output non-colored plain text\nText color in this mode depends on your desktop.\n");
-     printf ("Note: Only works if no output file is specified, or the output file specified is stdout.\n");
+     printf ("Note: The default color mode only works if no output file is specified, or the output file specified is stdout.\n");
+     /*
      printf ("Examples:\nGNOME uses a light terminal by default, so the text color is black.\n");
      printf ("KDE, most standalone window managers and the tty: use a black background, so the text color is white.\n");
      printf ("Windows: cmd uses a black background and a white foreground, so the text is white.\n");
+     */
      printf ("-h: print usage and exit\n");
      printf ("\nDefaults: -r variable -o stdout\n\n");
      printf ("\nExamples:\n");

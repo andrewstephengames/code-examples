@@ -23,7 +23,7 @@
 #define RESET "\033[0m"
 
 //color array
-char colors[16][10] = {
+char colors[20][20] = {
      BLACK,
      RED,
      GREEN,

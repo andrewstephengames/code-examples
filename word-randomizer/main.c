@@ -1,4 +1,5 @@
 //TODO: Add custom input file
+//FIXME: text file does not have 500 lines
 //TODO: Fix output in custom file with multiple switches
 #include <stdio.h>
 #include <stdlib.h>

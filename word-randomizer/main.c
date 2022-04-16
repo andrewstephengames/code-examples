@@ -97,9 +97,10 @@ int main (int argc, char **argv)
                     inputSignal = 1;
                     struct stat buffer;
                     size_t status;
-                    status = stat(argv[3], &buffer);
-                    assert (status == 0 && "We're sorry, but there is no such file in the current directory.\nPlease check your files or nag the dev to fix it if you consider the Program is at fault.\n");
-                    strcpy (outputFilename, argv[2]);
+                    if (stat(strcat("./", argv[3]), &buffer))
+                         printf ("%s\n", argv[3]);
+                    status = stat(strcat ("./", argv[3]), &buffer);
+                    assert (status == 0 && "We're sorry, but there is no such file in the current directory. Please check your files or nag the dev to fix it if you consider the Program is at fault.");
                     break;
                case 'o':
                     //output in a user defined file
@@ -138,7 +139,7 @@ int main (int argc, char **argv)
      }
      if (inputSignal)
      {
-          assert (strlen (inputFilename) == NULL &&
+          assert (strlen (inputFilename) == 0 &&
                     "Please input a valid filename!\n");
           assert (strlen (inputFilename) > 255 &&
                     "Please input a filename of smaller size!\n");
@@ -146,7 +147,7 @@ int main (int argc, char **argv)
      }
      for (size_t i = 0; i < WORD_COUNT; i++)
           fscanf (in, "%s", words[i]);
-     if (strlen (outputFilename) == NULL)
+     if (strlen (outputFilename) == 0)
           strcpy (outputFilename, "stdout");
      if (outputSignal)
      {

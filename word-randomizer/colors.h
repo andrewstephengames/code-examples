@@ -1,8 +1,6 @@
 #ifndef COLORS_H
-
 #define COLORS_H
-
-#else
+#endif
 
 //constants
 #define WORD_COUNT 255
@@ -48,5 +46,3 @@ char colors[20][20] = {
      WHITE,
      RESET
 };
-
-#endif

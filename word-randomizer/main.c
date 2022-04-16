@@ -1,10 +1,12 @@
-//TODO: Add custom input file
+//FIXME: 100: assertion execution
 //FIXME: text file does not have 500 lines
 //TODO: Fix output in custom file with multiple switches
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <assert.h>
+#include <sys/stat.h>
 
 //constants
 #define WORD_COUNT 255
@@ -56,6 +58,7 @@ char colors[20][20] = {
 void printUsage ()
 {
      printf ("\nUsage:\n");
+     printf ("-i: input file\n");
      printf ("-o: output file\n");
      printf ("-a: append mode (requires -o): Appends text to the output file on repeated execution\n");
      printf ("-r: number of words to output\n");
@@ -80,15 +83,24 @@ void printUsage ()
 int main (int argc, char **argv)
 {
      srand (clock());
-     size_t randSize = 0, outputSignal = 0, appendSignal = 0;
-     size_t commentSignal = 0, colorSignal = 1;
-     char outputFilename[255] = "";
+     size_t randSize = 0, inputSignal = 0, outputSignal = 0;
+     size_t commentSignal = 0, colorSignal = 1, appendSignal = 0;
+     char outputFilename[255] = "", inputFilename[255] = "";
      char words[WORD_COUNT][MAX_LEN];
      FILE *in = fopen ("words.txt", "r"), *out;
      while ((argc > 1) && (argv[1][0] == '-'))
      {
           switch (argv[1][1])
           {
+               case 'i':
+                    //output in a user defined file
+                    inputSignal = 1;
+                    struct stat buffer;
+                    size_t status;
+                    status = stat(argv[3], &buffer);
+                    assert (status == 0 && "We're sorry, but there is no such file in the current directory.\nPlease check your files or nag the dev to fix it if you consider the Program is at fault.\n");
+                    strcpy (outputFilename, argv[2]);
+                    break;
                case 'o':
                     //output in a user defined file
                     outputSignal = 1;
@@ -124,9 +136,17 @@ int main (int argc, char **argv)
           ++argv;
           --argc;
      }
+     if (inputSignal)
+     {
+          assert (strlen (inputFilename) == NULL &&
+                    "Please input a valid filename!\n");
+          assert (strlen (inputFilename) > 255 &&
+                    "Please input a filename of smaller size!\n");
+          in = fopen (inputFilename, "r");
+     }
      for (size_t i = 0; i < WORD_COUNT; i++)
           fscanf (in, "%s", words[i]);
-     if (strlen (outputFilename) == 0)
+     if (strlen (outputFilename) == NULL)
           strcpy (outputFilename, "stdout");
      if (outputSignal)
      {

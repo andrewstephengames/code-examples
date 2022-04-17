@@ -1,17 +1,37 @@
+/*
+     word-randomizer
+     Andrew Stephen
+     2022-04
+
+          Please consult the comments from within the
+     printUsage function for usage examples and additional
+     information in order to better understand the way the
+     program was designed.
+
+          The Program uses size_t boolean-like variables 
+     in order to determine the command line flags that are 
+     to be used by the user. In order to generate the words,
+     by default a `words.txt` list of words is included with
+     the source code, including the top 500 most commonly used
+     English words, according to 
+     https://www.smart-words.org/500-most-commonly-used-english-words.html. 
+     A custom input file may be provided as well, but the feature
+     is experimental currently as it generates issues to do
+     with file opening and closing.
+
+     (TODO)
+          The plans are to provide a graphical GTK interface,
+     as well as to make the program cross platform. It currently
+     compiles under Windows just fine, however some features are
+     harder to use due to how the command line is handled there.
+*/
+
+#include "headers/main.h"
+
 //FIXME: 100: assertion execution
 //FIXME: Segmentation fault when choosing input file in spite of it being created.
 //FIXME: text file does not have 500 lines
 //TODO: Fix output in custom file with multiple switches
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <assert.h>
-#include <sys/stat.h>
-#include "colors.h"
-
-
-
 
 void printUsage ()
 {
@@ -52,6 +72,7 @@ int main (int argc, char **argv)
           {
                case 'i':
                     //output in a user defined file
+                    //FIXME: stat mechanism
                     inputSignal = 1;
                     struct stat buffer;
                     size_t status;
@@ -85,6 +106,19 @@ int main (int argc, char **argv)
                case 'x':
                     //exclude colors (default: include colors)
                     colorSignal = 0;
+                    break;
+               case '-':
+                    if (strcmp ("help", argv[1]+2) == 0)
+                    {
+                         printUsage ();
+                         exit (EXIT_SUCCESS);
+                    }
+                    else 
+                    {
+                         printf ("Invalid argument!\n");
+                         printf ("Type `%s -h` for help.\n", argv[0]);
+                         exit (EXIT_FAILURE);
+                    }
                     break;
                default:
                     printf ("Invalid argument!\n");
